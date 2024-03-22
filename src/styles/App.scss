@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+$main-bg: #F6F6F6;
+$head-bg: #FFFFFF;
+$txt-color: #373745;
+$green-clr: #60C2AA;
+
+
+body{
+    background-color: $main-bg;
+}
+.head{
+    background-color: $head-bg;
+    align-items: center;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0px 2px 6px 0px #2C39791A;
+    padding: 0 40px;
+
+
+    .logo-menu{
+        display: flex;
+    }
+    .menu{
+        display: none;
+        justify-content: space-between;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        ul{
+            display: flex;
+            margin: 16px 0;
+
+            li {
+                margin: 0 5px;
+                a{
+                    font-family: "Roboto", sans-serif;
+                    font-size: 16px;
+                    font-weight: 500;
+                    text-align: left;
+                    color: $txt-color;
+                    text-decoration: none;
+                    padding: 4px 12px 4px 12px;
+                    border-radius: 20px;
+                    &.active, &:hover{
+                        background-color: $green-clr;
+                    }
+                }
+            }
+        }
+
+        .exit-btn{
+            display: flex;
+            align-items: center;
+            font-family: "Roboto",sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: left;
+            color: $txt-color;
+            text-decoration: none;
+            p{
+                display: none;
+                padding: 4px 12px 4px 12px;
+            }
+        }
+    }
+
+    
+}
+
+@media (max-width: 1000px) {
+    .head{
+
+        .navigation ul{
+            display: flex;
+            flex-direction: column;
+            li{
+                margin: 5px 0;
+            }
+        }
+    }
+    
+}
+
+@media (max-width: 600px) {
+    .head{
+        padding: 8px 40px;
+        .logo-menu{
+            width: 100%;
+            justify-content: space-between;
+        }
+        .navigation {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .menu{
+                display: flex;
+            }
+            ul{
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 40px;
+                li{
+                    margin: 0 0 20px 0;
+
+                    a{
+                        color: $txt-color;
+                        text-decoration: none;
+                        padding: 0;
+                        font-size: 20px;
+                        padding: 4px 12px 4px 12px;
+                        &.active, &:hover{
+                            background-color: $head-bg;
+                        }
+                    }
+                }
+                &.open{
+                    display: flex;
+                }
+            }
+            .exit-btn{
+                display: none;
+                margin-bottom: 40px;
+                p{
+                    display: block;
+                }
+
+                &.open{
+                    display: flex;
+                }
+            }
+        }
+        
+    }
+    
+}
