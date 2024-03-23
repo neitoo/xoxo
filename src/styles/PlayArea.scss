@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+$main-bg: #F6F6F6;
+$head-bg: #FFFFFF;
+$txt-color: #373745;
+$green-clr: #60C2AA;
+$gray-block: #EDEDED;
+
+
+.wrap-container{
+    height: calc(100vh - 186px);
+    padding: 60px 40px 77px 40px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto 1fr;
+    .container{
+        grid-column: span 3;
+        display: grid;
+        height: 100%;
+        grid-template-columns: 1fr 2fr 1fr;
+        .players{
+            grid-column: 1;
+            height: 100%;
+            box-shadow: 0px 4px 20px 0px #2C397917;
+            border-radius: 20px;
+        }
+
+        .container-board{
+            grid-column: 2;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .timer{
+                background-color: $gray-block;
+                font-family: "Roboto",sans-serif;
+                font-size: 2em;
+                font-weight: 900;
+                padding: 12px 24px;
+                border-radius: 12px;
+                margin: 0 0 20px 0;
+            }
+
+            .board{
+                .square{
+                    background-color: white;
+                    box-shadow: 0px 4px 20px 0px #2C397917;
+                    width: 10vw;
+                    height: 10vw;
+                    padding: 10px;
+                    border-radius: 12px;
+                    border: none;
+                    margin: 2px;
+
+                }
+            }
+            
+        }
+
+        .chat{
+            grid-column: 3;
+            height: 100%;
+            box-shadow: 0px 4px 20px 0px #2C397917;
+            border-radius: 20px;
+        }
+    }
+
+    .walks-player{
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Roboto",sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        padding: 12px 69px;
+        border-radius: 12px;
+        margin-top: 40px;
+
+        color: white;
+        background-color: $txt-color;
+        box-shadow: 0px 4px 20px 0px #2C397917;
+
+        img{
+            width: 24px;
+            margin: 0 12px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+
+    .wrap-container{
+        padding: 16px 12px;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+
+        .container{
+            grid-column: 1;
+            grid-row: 1;
+            grid-template-columns: auto;
+            grid-template-rows: repeat(3,auto);
+
+            .players{
+                grid-row: 1;
+                grid-column: 1;
+                height: 168px;
+                width: 100%;
+            }
+
+            .container-board{
+                grid-row: 2;
+                grid-column: 1;
+
+                .timer{
+                    margin: 24px 0;
+                }
+
+                .board{
+                    .square{
+                        width: 30vw;
+                        height: 30vw;
+    
+                    }
+                }
+            }
+
+            .chat{
+                grid-row: 3;
+                grid-column: 1;
+                height: 48px;
+                margin: 24px 0;
+            }
+        }
+
+        .walks-player {
+            grid-column: 1;
+            grid-row: 4; 
+            margin: 0;
+        }
+    }
+}

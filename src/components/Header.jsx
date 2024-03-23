@@ -4,6 +4,7 @@ import menu from '../assets/menu.svg'
 import close from '../assets/close.svg'
 import exit_button from '../assets/icon-button.svg'
 import { NavLink } from "react-router-dom";
+import '../styles/Header.scss';
 
 
 export const Header = () => {

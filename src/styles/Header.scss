@@ -4,6 +4,7 @@ $main-bg: #F6F6F6;
 $head-bg: #FFFFFF;
 $txt-color: #373745;
 $green-clr: #60C2AA;
+$hover-btn: #F7F7F7;
 
 
 body{
@@ -43,8 +44,11 @@ body{
                     text-decoration: none;
                     padding: 4px 12px 4px 12px;
                     border-radius: 20px;
-                    &.active, &:hover{
+                    &.active{
                         background-color: $green-clr;
+                    }
+                    &:hover{
+                        background-color: $hover-btn;
                     }
                 }
             }
