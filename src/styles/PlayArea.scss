@@ -1,173 +1,252 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-$main-bg: #F6F6F6;
-$head-bg: #FFFFFF;
+$main-bg: #f6f6f6;
+$head-bg: #ffffff;
 $txt-color: #373745;
-$green-clr: #60C2AA;
-$gray-block: #EDEDED;
+$green-color-btn: #3BA189;
+$green-clr: #60c2aa;
+$gray-block: #ededed;
 $gray-text: #898993;
-$hover-area: #F7F7F7;
+$hover-area: #f7f7f7;
+$hover-btn: #DCDCDF;
 
 
-
-
-.wrap-container{
+.wrap-container {
     padding: 7vh 4vh 0 4vh;
     display: grid;
-    grid-template-columns: 1fr 35vw 1fr; 
-    grid-template-rows: 35vw auto; 
+    grid-template-columns: 1fr 35vw 1fr;
+    grid-template-rows: 35vw auto;
     gap: 0 5vw;
-    grid-template-areas: 
-    "players area chat"
-    ". walks-player ."; 
-    // .container{
-    //     grid-column: span 3;
-    //     display: grid;
-    //     height: 100%;
-    //     grid-template-columns: 1fr 2fr 1fr;
-        .players-container{
-            grid-area: players;
-            height: 100%;
-            font-family: "Roboto", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+    grid-template-areas:
+        "players area chat"
+        ". walks-player .";
 
+    .modal-winner{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #89899364;
 
-            .players-block{
-                width: 100%;
-                box-shadow: 0px 4px 20px 0px #2C397917;
-                border-radius: 20px;
-                background-color: white;
-
-                .head-players{
-                    display: flex;
-                    width: 100%;
-                    justify-content: space-between;
-                    padding: 16px;
-                    border: none;
-                    background-color: transparent;
-                    align-items: center;
-
-                    .title{
-                        font-size: 16px;
-                        font-weight: 700;
-                    }
-                }
-
-                .players{
-                    width: fit-content;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 4px 16px 20px 16px;
-                    gap: 12px;
-
-                    transition: all ease 0.3s;
-
-                    &.collapsed {
-                        height: 0;
-                        overflow: hidden;
-                        padding: 0;
-                        gap: 0;
-                        overflow: hidden;
-                    }
-                    
-                    .players-item{
-                        display: flex;
-                        gap: 12px;
-                        align-items: flex-start;
-                        img{
-                            width: 18px;
-                        }
-
-                        .info-players {
-
-                            .name{
-                                margin-bottom: 4px;
-                                line-height: 20px;
-                            }
-
-                            .stats{
-                                font-size: 12px;
-                                color: $gray-text;
-                            }
-                        }
-                    }
-                }
-
-            
-            }
-            
+        &.closed{
+            visibility: collapse;
         }
 
-        .container-board{
-            grid-area: area;
-            border-radius: 20px;
+        .modal{
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            width: 400px;
+            height: fit-content;
+            background-color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 40px 24px;
+            opacity: 1;
+            gap: 20px;
 
-            .timer{
-                background-color: $gray-block;
+            p{
+                width: 100%;
                 font-family: "Roboto",sans-serif;
-                font-size: 2em;
-                font-weight: 900;
-                padding: 12px 24px;
-                border-radius: 12px;
-                margin: 0 0 20px 0;
+                font-size: 24px;
+                font-weight: 700;
+                color: $txt-color;
+                word-wrap: break-word; /* Для старых браузеров */
+                overflow-wrap: break-word;
+                text-align: center;
             }
 
-            .board{
+            .buttons{
                 width: 100%;
-                height: 100%;
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
-                .board-row{
-                    display: flex;
-                    justify-content: center;
-                    height: calc(33.33%);
-                }
-                .square{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: white;
-                    box-shadow: 0px 4px 20px 0px #2C397917;
-                    width: calc(33.33% - 4px); 
-                    height: calc(33.33% - 4px); 
-                    height: 100%;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+                
+                button{
+                    background-color: $hover-area;
+                    width: 100%;
+                    height: fit-content;
                     border-radius: 12px;
                     border: none;
-                    margin: 2px;
-                    box-sizing: border-box;
-                    transition: background-color ease 0.3s;
-
+                    padding: 12px 20px;
+                    
+                    font-family: "Roboto",sans-serif;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $txt-color;
+    
                     &:hover{
-                        background-color: $hover-area;
+                        background-color: $hover-btn;
                     }
-
-                    img{
-                        width: 85%;
-                        height: 85%;
+    
+                    &.new-game{
+                        background-color: $green-color-btn;
+                        color: white;
+                        &:hover{
+                            background-color: $green-clr;
+                        }
                     }
                 }
             }
             
         }
+    }
+    .players-container {
+        grid-area: players;
+        height: 100%;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
 
-        .chat{
-            grid-area: chat;
-            height: 100%;
-            box-shadow: 0px 4px 20px 0px #2C397917;
+        .players-block {
+            width: 100%;
+            box-shadow: 0px 4px 20px 0px #2c397917;
             border-radius: 20px;
+            background-color: white;
+
+            .head-players {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                padding: 16px;
+                border: none;
+                background-color: transparent;
+                align-items: center;
+
+                .title {
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+            }
+
+            .players {
+                width: fit-content;
+                display: flex;
+                flex-direction: column;
+                padding: 4px 16px 20px 16px;
+                gap: 12px;
+
+                transition: all ease 0.3s;
+
+                &.collapsed {
+                    height: 0;
+                    overflow: hidden;
+                    padding: 0;
+                    gap: 0;
+                    overflow: hidden;
+                }
+
+                .players-item {
+                    display: flex;
+                    gap: 12px;
+                    align-items: flex-start;
+                    img {
+                        width: 18px;
+                    }
+
+                    .info-players {
+                        .name {
+                            margin-bottom: 4px;
+                            line-height: 20px;
+                        }
+
+                        .stats {
+                            font-size: 12px;
+                            color: $gray-text;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .container-board {
+        grid-area: area;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .timer, .start-game {
+            background-color: $gray-block;
+            font-family: "Roboto", sans-serif;
+            font-size: 1.8em;
+            font-weight: 800;
+            padding: 12px 24px;
+            border-radius: 12px;
+            margin: 0 0 20px 0;
+            border: none;
         }
 
-    .walks-player{
+        .start-game{
+            background-color: $green-color-btn;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            &:hover{
+                background-color: $green-clr;
+            }
+        }
+
+        .board {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            .board-row {
+                display: flex;
+                justify-content: center;
+                height: calc(33.33%);
+            }
+            .square {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                box-shadow: 0px 4px 20px 0px #2c397917;
+                width: calc(33.33% - 4px);
+                height: calc(33.33% - 4px);
+                height: 100%;
+                border-radius: 12px;
+                border: none;
+                margin: 2px;
+                box-sizing: border-box;
+                transition: background-color ease 0.3s;
+
+                &:hover {
+                    background-color: $hover-area;
+                }
+
+                img {
+                    width: 85%;
+                    height: 85%;
+                }
+            }
+        }
+    }
+
+    .chat {
+        grid-area: chat;
+        height: 100%;
+        box-shadow: 0px 4px 20px 0px #2c397917;
+        border-radius: 20px;
+    }
+
+    .walks-player {
         grid-area: walks-player;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Roboto",sans-serif;
+        font-family: "Roboto", sans-serif;
         font-size: 20px;
         font-weight: 400;
         padding: 12px 69px;
@@ -176,9 +255,9 @@ $hover-area: #F7F7F7;
 
         color: white;
         background-color: $txt-color;
-        box-shadow: 0px 4px 20px 0px #2C397917;
+        box-shadow: 0px 4px 20px 0px #2c397917;
 
-        img{
+        img {
             width: 24px;
             margin: 0 12px;
         }
@@ -186,49 +265,47 @@ $hover-area: #F7F7F7;
 }
 
 @media (max-width: 600px) {
-
-    .wrap-container{
+    .wrap-container {
         padding: 16px 12px;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto;
 
-        grid-template-areas: 
+        grid-template-areas:
             "players"
             "walks-player"
             "area"
-            "chat"; 
+            "chat";
 
-            .players{
-                grid-area: players;
+        .players {
+            grid-area: players;
+            width: 100%;
+        }
+
+        .container-board {
+            grid-area: area;
+            height: 100%;
+
+            .board {
                 width: 100%;
-            }
-
-            .container-board{
-                grid-area: area;
-                height: 100%;
-
-                .board{
-                    width: 100%;
-                    height: 55vh;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 4px;
-                    .board-row{
-                        height: 100%;
-                    }
-                    .square{
-                        width: calc(33.33% - 4px); 
-                        height: 100%; 
-    
-                    }
+                height: 55vh;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                .board-row {
+                    height: 100%;
+                }
+                .square {
+                    width: calc(33.33% - 4px);
+                    height: 100%;
                 }
             }
+        }
 
-            .chat{
-                grid-area: chat;
-                height: 48px;
-                margin: 24px 0;
-            }
+        .chat {
+            grid-area: chat;
+            height: 48px;
+            margin: 24px 0;
+        }
 
         .walks-player {
             grid-area: walks-player;
