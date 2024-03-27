@@ -46,9 +46,11 @@ body{
                     border-radius: 20px;
                     &.active{
                         background-color: $green-clr;
+                        color: white;
                     }
                     &:hover{
                         background-color: $hover-btn;
+                        color: $txt-color;
                     }
                 }
             }
