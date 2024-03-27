@@ -1,8 +1,11 @@
 {
   "files": {
-    "main.css": "/xoxo/static/css/main.f59b933d.css",
-    "main.js": "/xoxo/static/js/main.32f84e53.js",
+    "main.css": "/xoxo/static/css/main.2ca66891.css",
+    "main.js": "/xoxo/static/js/main.e5c35e56.js",
+    "static/media/casual-life-3d-gold-trophy-in-air 1.svg": "/xoxo/static/media/casual-life-3d-gold-trophy-in-air 1.3df78b3950919811b5337c65eae35950.svg",
+    "static/media/closed-traffic.svg": "/xoxo/static/media/closed-traffic.bc494147d114a49e11817d299022349b.svg",
     "static/media/logo.svg": "/xoxo/static/media/logo.2a63331d3fdf39993bcee0bb7447b80d.svg",
+    "static/media/time-out.svg": "/xoxo/static/media/time-out.c9845c3963d83864d5b2d8d94bd24730.svg",
     "static/media/union.svg": "/xoxo/static/media/union.8d240fb1af3614c69c4989c2958c2ecf.svg",
     "static/media/icon-button.svg": "/xoxo/static/media/icon-button.f6f54aee0791bfa5c2ac7a1b0dd239c7.svg",
     "index.html": "/xoxo/index.html",
@@ -11,11 +14,11 @@
     "static/media/arrow-down.svg": "/xoxo/static/media/arrow-down.23e23a72f8d853eb151471818d63996c.svg",
     "static/media/menu.svg": "/xoxo/static/media/menu.c6a6d7812bfddf8d2d3471b977517889.svg",
     "static/media/arrow-up.svg": "/xoxo/static/media/arrow-up.4b83c1e7b64a43221326e303a871a571.svg",
-    "main.f59b933d.css.map": "/xoxo/static/css/main.f59b933d.css.map",
-    "main.32f84e53.js.map": "/xoxo/static/js/main.32f84e53.js.map"
+    "main.2ca66891.css.map": "/xoxo/static/css/main.2ca66891.css.map",
+    "main.e5c35e56.js.map": "/xoxo/static/js/main.e5c35e56.js.map"
   },
   "entrypoints": [
-    "static/css/main.f59b933d.css",
-    "static/js/main.32f84e53.js"
+    "static/css/main.2ca66891.css",
+    "static/js/main.e5c35e56.js"
   ]
 }
