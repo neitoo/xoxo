@@ -3,6 +3,7 @@
 $main-bg: #F6F6F6;
 $head-bg: #FFFFFF;
 $txt-color: #373745;
+$green-color-btn: #3BA189;
 $green-clr: #60C2AA;
 $gray-block: #EDEDED;
 $xoxo-clr:#E9256E;
@@ -43,14 +44,13 @@ $hover-btn: #F7F7F7;
             line-height: 1.8em;
             font-weight: 400;
             a{
-                
-                color: $txt-color;
-                background-color: $green-clr;
+                color: white;
+                background-color: $green-color-btn;
                 text-decoration: none;
                 padding: 4px 12px 4px 12px;
                 border-radius: 20px;
                 &:hover{
-                    background-color: $hover-btn;
+                    background-color: $green-clr;
                 }
             }
         }
