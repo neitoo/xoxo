@@ -10,7 +10,7 @@ import { PlayersAccordion } from "../components/PlayersAccordion";
 let playerList = [
     {
         side: "x",
-        fullname: "Прохоренков Никита Валерьевич",
+        fullname: "Игрок #1",
     },
     {
         side: "o",
