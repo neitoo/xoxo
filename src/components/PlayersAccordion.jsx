@@ -18,15 +18,15 @@ export const PlayersAccordion = ({ players }) => {
                 <img src={isCollapsed ? a_down : a_up} alt="Раскрыть" />
             </button>
             <div className={`players ${isCollapsed ? 'collapsed' : ''}`}>
-                {players.map((players) => (
+                {players.map((player) => (
                     <div className="players-item">
                         <img
-                            src={players.side === "x" ? union : zero}
-                            alt={`${players.side === "x" ? 'Крестик' : 'нолик'}`}
+                            src={player.side === "x" ? union : zero}
+                            alt={`${player.side === "x" ? 'Крестик' : 'нолик'}`}
                         />
                         <div className="info-players">
-                            <p className="name">{players.fullname}</p>
-                            <p className="stats">0% побед</p>
+                            <p className="name">{player.fullname}</p>
+                            <p className="stats">{player.win}% побед</p>
                         </div>
                     </div>
                 ))}
