@@ -4,11 +4,13 @@ $main-bg: #f6f6f6;
 $head-bg: #ffffff;
 $txt-color: #373745;
 $green-color-btn: #3BA189;
+$green-active-btn: #60C2AA4D;
 $green-clr: #60c2aa;
 $gray-block: #ededed;
 $gray-text: #898993;
 $hover-area: #f7f7f7;
 $hover-btn: #DCDCDF;
+$active-btn: #F7F7F7;
 
 
 .wrap-container {
@@ -27,10 +29,9 @@ $hover-btn: #DCDCDF;
         align-items: center;
         width: 100%;
         height: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: fixed;
+        top: 0;
+        left: 0;
         background-color: #89899364;
 
         &.closed{
@@ -42,7 +43,7 @@ $hover-btn: #DCDCDF;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 400px;
+            width: 25%;
             height: fit-content;
             background-color: white;
             border: none;
@@ -57,7 +58,7 @@ $hover-btn: #DCDCDF;
                 font-size: 24px;
                 font-weight: 700;
                 color: $txt-color;
-                word-wrap: break-word; /* Для старых браузеров */
+                word-wrap: break-word;
                 overflow-wrap: break-word;
                 text-align: center;
             }
@@ -86,12 +87,19 @@ $hover-btn: #DCDCDF;
                     &:hover{
                         background-color: $hover-btn;
                     }
+
+                    &:active{
+                        background-color: $active-btn;
+                    }
     
                     &.new-game{
                         background-color: $green-color-btn;
                         color: white;
                         &:hover{
                             background-color: $green-clr;
+                        }
+                        &:active{
+                            background-color: $green-active-btn;
                         }
                     }
                 }
@@ -176,14 +184,16 @@ $hover-btn: #DCDCDF;
         align-items: center;
 
         .timer, .start-game {
+            width: 40%;
             background-color: $gray-block;
             font-family: "Roboto", sans-serif;
             font-size: 1.8em;
             font-weight: 800;
-            padding: 12px 24px;
+            padding: 12px 0;
             border-radius: 12px;
             margin: 0 0 20px 0;
             border: none;
+            text-align: center;
         }
 
         .start-game{
@@ -213,8 +223,8 @@ $hover-btn: #DCDCDF;
                 align-items: center;
                 background-color: white;
                 box-shadow: 0px 4px 20px 0px #2c397917;
-                width: calc(33.33% - 4px);
-                height: calc(33.33% - 4px);
+                width: calc(33.33vw - 4px);
+                height: calc(33.33vw - 4px);
                 height: 100%;
                 border-radius: 12px;
                 border: none;
@@ -264,10 +274,10 @@ $hover-btn: #DCDCDF;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
     .wrap-container {
         padding: 16px 12px;
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
         grid-template-rows: auto auto auto auto;
 
         grid-template-areas:
@@ -276,34 +286,40 @@ $hover-btn: #DCDCDF;
             "area"
             "chat";
 
+        .modal-winner{
+            .modal{
+                width: 70%;
+            }
+        }
+
         .players {
             grid-area: players;
-            width: 100%;
         }
 
         .container-board {
             grid-area: area;
-            height: 100%;
 
             .board {
                 width: 100%;
-                height: 55vh;
+                height: 100vw;
                 display: flex;
                 flex-direction: column;
                 gap: 4px;
                 .board-row {
-                    height: 100%;
+                    width: 100%;
+                    height: 33.33vw;
                 }
                 .square {
-                    width: calc(33.33% - 4px);
-                    height: 100%;
+                    width: calc(33.33vw);
+                    height: calc(33.33vw);
                 }
             }
         }
 
         .chat {
             grid-area: chat;
-            height: 48px;
+            width: 100%;
+            height: 100%;
             margin: 24px 0;
         }
 

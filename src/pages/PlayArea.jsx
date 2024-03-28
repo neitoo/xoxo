@@ -11,10 +11,12 @@ let playerList = [
     {
         side: "x",
         fullname: "Игрок #1",
+        win: 0,
     },
     {
         side: "o",
         fullname: "Игрок #2",
+        win: 0,
     },
 ];
 
@@ -33,6 +35,7 @@ export default class PlayArea extends Component {
         this.handleStartGame = this.handleStartGame.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleRestartGame = this.handleRestartGame.bind(this);
     }
 
     componentWillUnmount(){
@@ -50,6 +53,20 @@ export default class PlayArea extends Component {
     handleStartGame(){
         this.setState({ gameIsStarted: true })
         this.timerInterval = setInterval(this.tick, 1000);
+    }
+
+    handleRestartGame(){
+        this.setState(
+            {
+                squares: Array(9).fill(null),
+                xIsNext: true,
+                lastPlayer: this.xIsNext ? playerList[0].fullname : playerList[1].fullname,
+                isWinnerModalOpen: true,
+                timeLeft: 180,
+                isTimeOutModalOpen: false,
+                gameIsStarted: false,
+            }
+        );
     }
 
     handleClick(i) {
@@ -106,7 +123,7 @@ export default class PlayArea extends Component {
                                         ? `${this.state.xIsNext ? playerList[1].fullname : playerList[0].fullname} победил!`
                                         : (this.state.isTimeOutModalOpen ? `${this.state.lastPlayer} победил!` : "Ничья!")}</p>
                                 <div className="buttons">
-                                    <button className="new-game">Новая игра</button>
+                                    <button className="new-game" onClick={this.handleRestartGame}>Новая игра</button>
                                     <button className="close" onClick={this.handleCloseModal}>Закрыть</button>
                                 </div>
                             </div>
