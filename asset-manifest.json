@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/xoxo/static/css/main.85b28872.css",
-    "main.js": "/xoxo/static/js/main.79014d8c.js",
+    "main.css": "/xoxo/static/css/main.9571483c.css",
+    "main.js": "/xoxo/static/js/main.2b1b171c.js",
     "static/media/casual-life-3d-gold-trophy-in-air 1.svg": "/xoxo/static/media/casual-life-3d-gold-trophy-in-air 1.3df78b3950919811b5337c65eae35950.svg",
     "static/media/closed-traffic.svg": "/xoxo/static/media/closed-traffic.bc494147d114a49e11817d299022349b.svg",
     "static/media/logo.svg": "/xoxo/static/media/logo.2a63331d3fdf39993bcee0bb7447b80d.svg",
@@ -14,11 +14,11 @@
     "static/media/arrow-down.svg": "/xoxo/static/media/arrow-down.23e23a72f8d853eb151471818d63996c.svg",
     "static/media/menu.svg": "/xoxo/static/media/menu.c6a6d7812bfddf8d2d3471b977517889.svg",
     "static/media/arrow-up.svg": "/xoxo/static/media/arrow-up.4b83c1e7b64a43221326e303a871a571.svg",
-    "main.85b28872.css.map": "/xoxo/static/css/main.85b28872.css.map",
-    "main.79014d8c.js.map": "/xoxo/static/js/main.79014d8c.js.map"
+    "main.9571483c.css.map": "/xoxo/static/css/main.9571483c.css.map",
+    "main.2b1b171c.js.map": "/xoxo/static/js/main.2b1b171c.js.map"
   },
   "entrypoints": [
-    "static/css/main.85b28872.css",
-    "static/js/main.79014d8c.js"
+    "static/css/main.9571483c.css",
+    "static/js/main.2b1b171c.js"
   ]
 }
