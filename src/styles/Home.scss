@@ -21,6 +21,7 @@ $hover-btn: #F7F7F7;
 
     h1{
         font-size: 24px;
+        text-align: center;
         .name-site{
             font-family: "Baloo Bhaijaan 2", sans-serif;
             font-weight: 600;
@@ -44,6 +45,7 @@ $hover-btn: #F7F7F7;
             line-height: 1.8em;
             font-weight: 400;
             a{
+                white-space: nowrap;
                 color: white;
                 background-color: $green-color-btn;
                 text-decoration: none;
@@ -53,6 +55,23 @@ $hover-btn: #F7F7F7;
                     background-color: $green-clr;
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 1300px){
+    .wrap-home{
+        .content-instruction{
+            flex-direction: column;
+            width: 40vw;
+        }
+    }
+}
+
+@media (max-width: 600px){
+    .wrap-home{
+        h1, .content-instruction{
+            width: 80vw;
         }
     }
 }
