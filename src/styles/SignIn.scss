@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+$main-bg: #F6F6F6;
+$head-bg: #FFFFFF;
+$txt-color: #373745;
+$green-color-btn: #3BA189;
+$green-clr: #60C2AA;
+$gray-block: #EDEDED;
+$xoxo-clr:#E9256E;
+$hover-btn: #F7F7F7;
+$border: #DCDCDF;
+
+*{
+    box-sizing: border-box;
+}
+.login-wrapper{
+    height: 100dvh;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    form{
+        min-width: 25vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        background-color: white;
+        border-radius: 16px;
+        border: none;
+        box-shadow: 0px 4px 20px 0px #2C397917;
+        padding: 40px 24px;
+
+        h2{
+            font-family: "Roboto", sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        img{
+            width: 132px;
+            height: 132px;
+        }
+
+        .inputs{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:12px 0;
+
+            input{
+                width: 100%;
+                border: 1px solid #DCDCDF;
+                border-radius: 12px;
+                padding: 12px 20px;
+                font-family: "Roboto",sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+
+                &:focus{
+                    border-color: $green-color-btn;
+                    outline: none;
+                }
+
+                &:hover{
+                    border-color: $green-clr;
+                }
+
+            }
+        }
+        
+        button{
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-radius: 12px;
+            background-color: $green-clr;
+            color: white;
+            font-family: "Roboto", sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+
+            &:hover{
+                background-color: $green-color-btn;
+            }
+
+            &:active, &[disabled]{
+                opacity: 0.3;
+            }
+
+        }
+
+    }
+}
+
+@media (max-width: 600px){
+    .login-wrapper{
+        height: 100dvh;
+        padding: 0;
+        form{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
