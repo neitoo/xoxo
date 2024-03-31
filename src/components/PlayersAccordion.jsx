@@ -19,7 +19,7 @@ export const PlayersAccordion = ({ players }) => {
             </button>
             <div className={`players ${isCollapsed ? 'collapsed' : ''}`}>
                 {players.map((player) => (
-                    <div className="players-item">
+                    <div className="players-item" key={player.id}>
                         <img
                             src={player.side === "x" ? union : zero}
                             alt={`${player.side === "x" ? 'Крестик' : 'нолик'}`}
