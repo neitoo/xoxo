@@ -26,19 +26,19 @@ export const Header = () => {
                 
                 <ul className={menuOpen ? "open" : ""}>
                     <li>
-                        <NavLink to="/play">Игровое поле</NavLink>
+                        <NavLink to="/m/play">Игровое поле</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/rating">Рейтинг</NavLink>
+                        <NavLink to="/m/rating">Рейтинг</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/active-player">Активные игроки</NavLink>
+                        <NavLink to="/m/active-player">Активные игроки</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/game-history">История игр</NavLink>
+                        <NavLink to="/m/game-history">История игр</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/player-list">Список игроков</NavLink>
+                        <NavLink to="/m/player-list">Список игроков</NavLink>
                     </li>
                 </ul>
                 <a href="#" className={menuOpen ? "exit-btn open" : "exit-btn"}>
