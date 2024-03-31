@@ -1,27 +1,29 @@
-import {Header} from './components/Header';
-import { Routes, Route} from "react-router-dom";
-
-
-import PlayArea from './pages/PlayArea';
-import Rating from './pages/Rating';
-import ActivePlayer from './pages/ActivePlayer';
-import GameHistory from './pages/GameHistory';
-import PlayerList from './pages/PlayerList';
-import Home from './pages/Home';
+import { AuthC } from "./context/AuthC";
+import { SignIn } from "./pages/SignIn";
+import Main from "./pages/Main";
+import { BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
+import { useContext } from "react";
 
 function App() {
+
+  const {isUserLogged} = useContext(AuthC);
+
   return (
-    <div className="App">
-        <Header/>
-        <Routes>
-            <Route path="/xoxo/" element={<Home/>}/>
-            <Route exact path="/play" element={<PlayArea/>}/>
-            <Route exact path="/rating" element={<Rating/>}/>
-            <Route exact path="/active-player" element={<ActivePlayer/>}/>
-            <Route exact path="/game-history" element={<GameHistory/>}/>
-            <Route exact path="/player-list" element={<PlayerList/>}/>
-        </Routes>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {isUserLogged ? (
+            <Route path="/m/*" element={<Main />} />
+          ) : (
+            <>
+              <Route path="sign-in" element={<SignIn />} />
+            </>
+          )}
+          <Route  
+            path="*"
+            element={<Navigate to={isUserLogged ? "m" : "sign-in"} />}
+          />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
