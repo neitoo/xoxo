@@ -8,6 +8,7 @@ $gray-block: #EDEDED;
 $xoxo-clr:#E9256E;
 $hover-btn: #F7F7F7;
 $border: #DCDCDF;
+$errors: #E93E3E;
 
 *{
     box-sizing: border-box;
@@ -50,28 +51,47 @@ $border: #DCDCDF;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            gap:12px 0;
+            align-items:flex-start;
+            gap: 12px 0;
 
-            input{
+            .wrap-input{
                 width: 100%;
-                border: 1px solid #DCDCDF;
-                border-radius: 12px;
-                padding: 12px 20px;
-                font-family: "Roboto",sans-serif;
-                font-size: 16px;
-                font-weight: 400;
 
-                &:focus{
-                    border-color: $green-color-btn;
-                    outline: none;
+                input{
+                    width: 100%;
+                    border: 1px solid #DCDCDF;
+                    border-radius: 12px;
+                    padding: 12px 20px;
+                    font-family: "Roboto",sans-serif;
+                    font-size: 16px;
+                    font-weight: 400;
+    
+                    &:focus{
+                        border-color: $green-color-btn;
+                        outline: none;
+                    }
+    
+                    &:hover{
+                        border-color: $green-clr;
+                    }
+
+                    &.error{
+                        border-color: $errors;
+                    }
+    
                 }
-
-                &:hover{
-                    border-color: $green-clr;
+    
+                .errors{
+                    font-family: "Roboto",sans-serif;
+                    font-size: 12px;
+                    font-weight: 400;
+                    text-align: left;
+                    line-height: 16px;
+                    color: $errors;
                 }
-
             }
+
+            
         }
         
         button{
