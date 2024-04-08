@@ -247,8 +247,15 @@ $active-btn: #F7F7F7;
     .chat {
         grid-area: chat;
         height: 100%;
-        box-shadow: 0px 4px 20px 0px #2c397917;
         border-radius: 20px;
+        display: grid; 
+        grid-template-columns: 1fr; 
+        grid-template-rows: 90% 1fr; 
+        gap: 0px 20px; 
+        grid-template-areas: 
+            "messages-list"
+            "chat-controls"; 
+        align-items: end;
     }
 
     .walks-player {
