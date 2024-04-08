@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import "../../styles/PlayArea.scss";
+import "../../styles/Chat.scss";
 import zeroImg from "../../assets/zero.svg";
 import unionImg from "../../assets/union.svg";
 import gold_trophy from "../../assets/casual-life-3d-gold-trophy-in-air 1.svg";
 import Board from "../../components/Board";
 import timeOut from "../../assets/time-out.svg"
 import { PlayersAccordion } from "../../components/PlayersAccordion";
+import { MessageForm } from "../../components/chat/MessageForm"
+import MessageList from "../../components/chat/MessageList";
 
 let playerList = [
     {
@@ -33,6 +36,7 @@ export default class PlayArea extends Component {
             timeLeft: 180,
             isTimeOutModalOpen: false,
             gameIsStarted: false,
+            messages: [],
         };
         this.handleStartGame = this.handleStartGame.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -96,6 +100,21 @@ export default class PlayArea extends Component {
         this.setState({isTimeOutModalOpen: true});
     }
 
+    handleSendMessage = (message,namePlayer,isCurrentPlayer) => {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const newMessage = {
+            name: namePlayer,
+            curPlayer: isCurrentPlayer,
+            text: message,
+            time: `${hours}:${minutes}`,
+        };
+        this.setState(prevState => ({
+        messages: [...prevState.messages, newMessage]
+        }));
+    }
+
     formatTime(seconds) {
         const minutes = Math.floor((seconds % 3600) / 60);
         const remainingSeconds = seconds % 60;
@@ -149,7 +168,10 @@ export default class PlayArea extends Component {
                         onClick={this.handleClick}
                     />
                 </main>
-                <aside className="chat"></aside>
+                <aside className="chat">
+                    <MessageList messages={this.state.messages}/>
+                    <MessageForm playerList={playerList} onMessage={this.handleSendMessage}/>
+                </aside>
                 <div className="walks-player">
                     <p>Ходит</p>
                     <img
