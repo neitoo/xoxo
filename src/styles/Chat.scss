@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+$main-bg: #f6f6f6;
+$head-bg: #ffffff;
+$txt-color: #373745;
+$green-color-btn: #3BA189;
+$green-active-btn: #60C2AA4D;
+$green-clr: #60c2aa;
+$gray-block: #ededed;
+$gray-text: #898993;
+$hover-area: #f7f7f7;
+$hover-btn: #DCDCDF;
+$active-btn: #F7F7F7;
+$red: #E38BAC;
+
+.chat{
+    .scroll{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        overflow-y: scroll;
+        grid-area: messages-list;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .messages-list{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 20px;
+            flex: 1;
+
+            .wrap-message{
+                display: flex;
+
+                &.green{
+                    justify-content: flex-start;
+                }
+
+                &.red{
+                    justify-content: flex-end;
+                }
+
+                .message{
+                    width: 80%;
+                    background-color: white;
+                    padding: 12px;
+                    align-self: flex-end;
+
+                    &.green{
+                        border-radius: 16px 16px 16px 0px;
+                    }
+
+                    &.red{
+                        border-radius: 16px 16px 0px 16px;
+                    }
+
+                    .head-message{
+                        display: flex;
+                        justify-content: space-between;
+                        font-family: "Roboto", sans-serif;
+                        font-size: 14px;
+                        font-weight: 500;
+
+                        .name.green{
+                            color: $green-clr;
+                        }
+
+                        .name.red{
+                            color: $red;
+                        }
+
+                        .time{
+                            font-weight: 400;
+                            color: $gray-text;
+                        }
+                    }
+
+                    .message-text{
+                        font-family: "Roboto",sans-serif;
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: $txt-color;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                        margin-top: 8px;
+                    }
+                }
+            }
+        }
+    }
+
+    .chat-controls{
+        width: 100%;
+        height: 100%;
+        grid-area: chat-controls;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 12px;
+
+        select{
+            height: 80%;
+            flex: 1;
+            border: 1px solid $hover-btn;
+            padding: 12px 0;
+            border-radius: 12px;
+            font-family: "Roboto", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-align: left;
+
+            &:focus{
+                border-color: $green-color-btn;
+                outline: none;
+            }
+
+            &:hover{
+                border-color: $green-clr;
+            }
+        }
+
+        input{
+            height: 80%;
+            flex: 6;
+            border: 1px solid $hover-btn;
+            padding: 12px 20px 12px 20px;
+            border-radius: 12px;
+            font-family: "Roboto", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-align: left;
+
+
+            &:focus{
+                border-color: $green-color-btn;
+                outline: none;
+            }
+
+            &:hover{
+                border-color: $green-clr;
+            }
+        }
+
+        button{
+            flex: 1;
+            height: 80%;
+            background-color: $green-clr;
+            border-radius: 12px;
+            border: none;
+
+            &:hover{
+                background-color: $green-color-btn;
+            }
+
+            &:active, &[disabled]{
+                opacity: 0.3;
+            }
+        }
+    }
+}
