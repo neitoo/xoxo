@@ -34,6 +34,10 @@ const AuthProvider = ({children}) => {
 
     }
 
+    const handleLogOut = () => {
+        setIsUserLogged(false);
+    }
+
     const validateYupFields = (data) => {
         try {
             signInYup.validateSync(data, { abortEarly: false });
@@ -62,7 +66,8 @@ const AuthProvider = ({children}) => {
             value={{
                 isUserLogged,
                 handleSignIn,
-                error
+                error,
+                handleLogOut
             }}
         >
             {isAppReady ? (children) : (
