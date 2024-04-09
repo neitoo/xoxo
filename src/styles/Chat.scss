@@ -164,3 +164,102 @@ $red: #E38BAC;
         }
     }
 }
+
+@media (max-width: 1000px) {
+    .chat{
+        .scroll{
+    
+            .messages-list{
+                flex-direction: column-reverse;
+                justify-content: flex-end;
+    
+                .wrap-message{
+                    
+    
+                    &.green{
+                        
+                    }
+    
+                    &.red{
+                        
+                    }
+    
+                    .message{
+                        
+    
+                        &.green{
+                            
+                        }
+    
+                        &.red{
+                            
+                        }
+    
+                        .head-message{
+                            
+    
+                            .name.green{
+                                
+                            }
+    
+                            .name.red{
+                                
+                            }
+    
+                            .time{
+                                
+                            }
+                        }
+    
+                        .message-text{
+                            
+                        }
+                    }
+                }
+            }
+        }
+    
+        .chat-controls{
+            align-items: flex-start;
+            gap: 10px;
+    
+            select{
+                width: 100%;
+                flex: 2;
+    
+                &:focus{
+                    
+                }
+    
+                &:hover{
+                    
+                }
+            }
+    
+            input{
+                
+                flex: 3;
+    
+                &:focus{
+                    
+                }
+    
+                &:hover{
+                    
+                }
+            }
+    
+            button{
+               
+    
+                &:hover{
+                    
+                }
+    
+                &:active, &[disabled]{
+                    
+                }
+            }
+        }
+    }
+}
