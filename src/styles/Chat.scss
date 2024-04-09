@@ -173,49 +173,6 @@ $red: #E38BAC;
                 flex-direction: column-reverse;
                 justify-content: flex-end;
     
-                .wrap-message{
-                    
-    
-                    &.green{
-                        
-                    }
-    
-                    &.red{
-                        
-                    }
-    
-                    .message{
-                        
-    
-                        &.green{
-                            
-                        }
-    
-                        &.red{
-                            
-                        }
-    
-                        .head-message{
-                            
-    
-                            .name.green{
-                                
-                            }
-    
-                            .name.red{
-                                
-                            }
-    
-                            .time{
-                                
-                            }
-                        }
-    
-                        .message-text{
-                            
-                        }
-                    }
-                }
             }
         }
     
@@ -226,39 +183,11 @@ $red: #E38BAC;
             select{
                 width: 100%;
                 flex: 2;
-    
-                &:focus{
-                    
-                }
-    
-                &:hover{
-                    
-                }
             }
     
             input{
                 
                 flex: 3;
-    
-                &:focus{
-                    
-                }
-    
-                &:hover{
-                    
-                }
-            }
-    
-            button{
-               
-    
-                &:hover{
-                    
-                }
-    
-                &:active, &[disabled]{
-                    
-                }
             }
         }
     }
