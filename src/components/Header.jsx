@@ -1,13 +1,16 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import logo from '../assets/logo.svg'
 import menu from '../assets/menu.svg'
 import close from '../assets/close.svg'
 import exit_button from '../assets/icon-button.svg'
 import { NavLink } from "react-router-dom";
 import '../styles/Header.scss';
+import { AuthC } from "../context/AuthC";
 
 
 export const Header = () => {
+    const {handleLogOut} = useContext(AuthC);
+
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -41,10 +44,10 @@ export const Header = () => {
                         <NavLink to="/m/player-list">Список игроков</NavLink>
                     </li>
                 </ul>
-                <a href="#" className={menuOpen ? "exit-btn open" : "exit-btn"}>
+                <button href="#" className={menuOpen ? "exit-btn open" : "exit-btn"} onClick={handleLogOut}>
                     <p>Выйти</p>
                     <img src={exit_button} alt="Exit"/>
-                </a>
+                </button>
             </nav>
         </header>
     );
