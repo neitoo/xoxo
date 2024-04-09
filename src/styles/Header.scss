@@ -66,6 +66,10 @@ body{
             text-align: left;
             color: $txt-color;
             text-decoration: none;
+            background-color: white;
+            border-radius: 16px;
+            border: none;
+            cursor: pointer;
             p{
                 display: none;
                 padding: 4px 12px 4px 12px;
