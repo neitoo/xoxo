@@ -9,12 +9,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signInYup } from "../context/validation";
 
 const defaultValues = {
-    login: "pizzadabdab",
-    password: "piZZa1234_",
+    login: "",
+    password: "",
 };
 
 export const SignIn = () => {
-    const { handleSignIn, error } = useContext(AuthC);
+    const { handleSignIn, userData, error } = useContext(AuthC);
 
     const { 
         handleSubmit, 
@@ -23,6 +23,7 @@ export const SignIn = () => {
     } = useForm(
         {
             defaultValues,
+            resolver: yupResolver(signInYup)
         }
     );
 
@@ -38,31 +39,34 @@ export const SignIn = () => {
                 <div className="inputs">
                     <div className="wrap-input">
                         <input 
-                            className={`${errors.login || error.login ? 'error' : ''}`}
+                            className={`${errors.login ? 'error' : ''}`}
                             type="text"
                             id="login"
                             placeholder="Логин"
                             {...register("login")}
                         />
-                        {(errors?.login || error?.login) && (
-                            <p className="errors">{errors?.login?.message || error?.login}</p>
+                        {(errors?.login) && (
+                            <p className="errors">{errors?.login?.message}</p>
                         )}
                     </div>
                     
                     <div className="wrap-input">
                         <input 
-                            className={`${errors.password || error.password ? 'error' : ''}`}
+                            className={`${errors.password ? 'error' : ''}`}
                             type="password" 
                             id="password"
                             placeholder="Пароль"
                             {...register("password")}
                         />
-                        {(errors?.password || error?.password) && (
-                            <p className="errors">{errors?.password?.message || error?.password}</p>
+                        {(errors?.password) && (
+                            <p className="errors">{errors?.password?.message}</p>
                         )}
                     </div>
                     
                 </div>
+                {(error) && (
+                    <p className="error">{error?.message}</p>
+                )}
                 <button type="submit" id="submit">Войти</button>
             </form>
         </div>
