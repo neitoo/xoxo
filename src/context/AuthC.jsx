@@ -1,7 +1,33 @@
 import { createContext, useState, useEffect } from "react";
 import { ColorRing } from "react-loader-spinner";
 import $api from "../http";
-import memoryJWT from "../services/memoryJWT";
+import axios from "axios";
+import config from "../config.js";
+import JWTService from "../services/JWTService.js";
+
+export const AuthClient = axios.create({
+    baseURL: `${config.API_URL}/api`,
+    withCredentials: true,
+});
+
+export const PrivateClient = axios.create({
+    baseURL: `${config.API_URL}/api/a`
+});
+
+PrivateClient.interceptors.request.use(
+    (config) => {
+        const accessToken = JWTService.getToken();
+
+        if(accessToken){
+            config.headers["Authorization"] = `Bearer ${accessToken}`;
+        }
+
+        return config;
+    },
+    (error) => {
+        Promise.reject(error);
+    }
+);
 
 export const AuthC = createContext({});
 
@@ -12,47 +38,71 @@ const AuthProvider = ({children}) => {
     const [isUserLogged, setIsUserLogged] = useState(false);
     const [error, setError] = useState({});
 
-    const handleSignIn = async (login,password) => {
 
-        $api.post("/auth", {login,password})
-            .then((response) => {
-                localStorage.setItem("accessToken", response.data.accessToken);
-                setIsUserLogged(true);
-                setUserData(response.data.user);
+    const handleProtect = (userId) => {
+        PrivateClient.post("/user", {id: userId})
+            .then((res)=>{
+                const { user_fullname, data_win, data_loose, user_status } = res.data;
+                setUserData((prevData) => ({
+                    ...prevData,
+                    fullname: user_fullname,
+                    dataWin: data_win,
+                    dataLoose: data_loose,
+                    status: user_status,
+                }));
             })
-            .catch(error => {
-                if (error.response) {
-                    const errorMessage = error.response.data.message;
-                    setError({ message: errorMessage});
+            .catch((error) =>{
+                console.error(error);
+            });
+    }
+
+    const handleSignIn = (data) => {
+        AuthClient.post("/auth", data)
+            .then((res) => {
+                const { accessToken, accessTokenExp, userId} = res.data;
+                
+                JWTService.setToken(accessToken,accessTokenExp);
+                setIsUserLogged(true);
+                setUserData({ id: userId });
+            })  
+            .catch((error) => {
+                if (error.response && error.response.data) {
+                    setError(error.response.data);
                 } else {
-                    console.error("Error:", error);
-                    setError({ message: "Ошибка сервера"});
+                    setError({ error: "Сервер не отвечает." });
                 }
             });
+        
+            
     }
 
     const handleLogOut = () => {
-        $api.post("/logout")
-            .then((response) => {
-                localStorage.removeItem("accessToken");
+        AuthClient.post("/logout")
+            .then(() => {
                 setIsUserLogged(false);
-                setUserData();
+                JWTService.deleteToken();
             })
-            .catch(error => {
-                console.error("Error:", error);
+            .catch((error)=>{
+                console.error(error.response.data);
             });
     }
+    
 
     useEffect(() => {
-        setIsAppReady(false);
-            setTimeout(()=>{
-                setIsAppReady(true)
-        },1000);
-        
-        if (isUserLogged) {
-            setIsAppReady(true);
-        }
-    }, [isUserLogged]);
+        AuthClient.post("/refresh")
+            .then((res) => {
+                const { accessToken, accessTokenExp} = res.data;
+                JWTService.setToken(accessToken, accessTokenExp);
+
+                setIsAppReady(true);
+                setIsUserLogged(true);
+                
+            })
+            .catch(() => {
+                setIsAppReady(true);
+                setIsUserLogged(false);
+            });
+    }, [userData]);
     
 
     return (
@@ -61,6 +111,7 @@ const AuthProvider = ({children}) => {
                 isUserLogged,
                 handleSignIn,
                 handleLogOut,
+                handleProtect,
                 userData,
                 error
             }}
