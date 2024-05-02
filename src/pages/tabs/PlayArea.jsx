@@ -9,6 +9,7 @@ import timeOut from "../../assets/time-out.svg"
 import { PlayersAccordion } from "../../components/PlayersAccordion";
 import { MessageForm } from "../../components/chat/MessageForm"
 import MessageList from "../../components/chat/MessageList";
+import { AuthC } from "../../context/AuthC";
 
 let playerList = [
     {
@@ -26,6 +27,8 @@ let playerList = [
 ];
 
 export default class PlayArea extends Component {
+    static contextType = AuthC;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -42,6 +45,20 @@ export default class PlayArea extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleRestartGame = this.handleRestartGame.bind(this);
+    }
+
+    componentDidMount(){
+        const {userData,handleProtect} = this.context;
+
+        if(userData.id){
+            handleProtect(userData.id);
+            
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { userData } = this.context;
+        console.log(userData);
     }
 
     componentWillUnmount(){
