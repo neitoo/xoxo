@@ -27,13 +27,9 @@ export const SignIn = () => {
         }
     );
 
-    const onSubmit = (data) => {
-        handleSignIn(data.login, data.password)
-    };
-
     return (
         <div className="login-wrapper">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleSignIn)}>
                 <img src={sobaka_img} alt="Картинка собаки"/>
                 <h2>Войдите в игру</h2>
                 <div className="inputs">
@@ -65,7 +61,7 @@ export const SignIn = () => {
                     
                 </div>
                 {(error) && (
-                    <p className="error">{error?.message}</p>
+                    <p className="error">{error?.error}</p>
                 )}
                 <button type="submit" id="submit">Войти</button>
             </form>
