@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { ColorRing } from "react-loader-spinner";
-import $api from "../http";
 import axios from "axios";
 import config from "../config.js";
 import JWTService from "../services/JWTService.js";
@@ -39,7 +38,8 @@ const AuthProvider = ({children}) => {
     const [error, setError] = useState({});
 
 
-    const handleProtect = (userId) => {
+    const handleProtect = () => {
+        const userId = JWTService.getUserID();
         PrivateClient.post("/user", {id: userId})
             .then((res)=>{
                 const { user_fullname, data_win, data_loose, user_status } = res.data;
@@ -59,12 +59,11 @@ const AuthProvider = ({children}) => {
     const handleSignIn = (data) => {
         AuthClient.post("/auth", data)
             .then((res) => {
-                const { accessToken, accessTokenExp, userId} = res.data;
-                
-                JWTService.setToken(accessToken,accessTokenExp);
+                const { accessToken, accessTokenExp, userId } = res.data;
+                JWTService.setToken(accessToken, accessTokenExp, userId);
                 setIsUserLogged(true);
                 setUserData({ id: userId });
-            })  
+            })
             .catch((error) => {
                 if (error.response && error.response.data) {
                     setError(error.response.data);
@@ -91,18 +90,33 @@ const AuthProvider = ({children}) => {
     useEffect(() => {
         AuthClient.post("/refresh")
             .then((res) => {
-                const { accessToken, accessTokenExp} = res.data;
-                JWTService.setToken(accessToken, accessTokenExp);
-
+                const { accessToken, accessTokenExp, id} = res.data;
+                JWTService.setToken(accessToken, accessTokenExp, id);
+                console.log("refresh");
                 setIsAppReady(true);
                 setIsUserLogged(true);
-                
+                setUserData({ id: id });
             })
             .catch(() => {
                 setIsAppReady(true);
                 setIsUserLogged(false);
             });
-    }, [userData]);
+    }, []);
+
+    useEffect(() => {
+        const handlePersistedLogOut = (event) => {
+          if (event.key === config.LOGOUT_STORAGE_KEY) {
+            JWTService.deleteToken();
+            setIsUserLogged(false);
+          }
+        };
+    
+        window.addEventListener("storage", handlePersistedLogOut);
+    
+        return () => {
+          window.removeEventListener("storage", handlePersistedLogOut);
+        };
+      }, []);
     
 
     return (
