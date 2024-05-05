@@ -5,7 +5,7 @@ export const MessageForm = ({playerList, onMessage}) => {
 
     const [message, setMessage] = useState('');
     const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0);
-    const [selectedPlayerName, setSelectedPlayerName] = useState(playerList[0].fullname);
+    const [selectedPlayerName, setSelectedPlayerName] = useState(playerList?.[0]?.fullname);
 
     const handleInputChange = (event) => {
         setMessage(event.target.value);
