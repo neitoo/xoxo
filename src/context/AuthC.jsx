@@ -53,8 +53,20 @@ const AuthProvider = ({children}) => {
             })
             .catch((error) =>{
                 console.error(error);
+                throw error;
             });
     }
+
+    const handleGetUsers = () => {
+        return PrivateClient.get("/users")
+          .then((res) => {
+            return res.data;
+          })
+          .catch((error) => {
+            console.error(error);
+            throw error;
+          });
+    };
 
     const handleSignIn = (data) => {
         AuthClient.post("/auth", data)
@@ -126,6 +138,7 @@ const AuthProvider = ({children}) => {
                 handleSignIn,
                 handleLogOut,
                 handleProtect,
+                handleGetUsers,
                 userData,
                 error
             }}
