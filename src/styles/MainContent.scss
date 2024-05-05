@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+$main-bg: #f6f6f6;
+$head-bg: #ffffff;
+$txt-color: #373745;
+$green-color-btn: #3BA189;
+$green-active-btn: #60C2AA4D;
+$green-clr: #60c2aa;
+$gray-block: #ededed;
+$gray-text: #898993;
+$hover-area: #f7f7f7;
+$hover-btn: #DCDCDF;
+$active-btn: #F7F7F7;
+
+.wrapper{
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 7vh;
+    .main-container{
+        width: 70%;
+        height:fit-content;
+        border: none;
+        border-radius: 40px;
+        background-color: $head-bg;
+        padding: 32px;
+
+        .head-container{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            align-items: center;
+
+            h1{
+                font-family: "Roboto", sans-serif;
+                font-size: 24px;
+                font-weight: 700;
+                text-align: center;
+
+            }
+
+            button{
+                border: none;
+                padding: 12px 20px;
+                border-radius: 12px;
+                font-family: "Roboto", sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                color: $head-bg;
+                background-color: $green-clr;
+
+                &:hover{
+                    background-color: $green-color-btn;
+                }
+    
+                &:active, &[disabled]{
+                    opacity: 0.3;
+                }
+            }
+        }
+
+        table{
+            width: 100%;
+
+            thead tr{
+                text-align: left;
+                font-family: "Roboto",sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 24px;
+            }
+
+            tbody tr{
+                font-family: "Roboto",sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                text-align: left;
+
+            }
+        }
+    }
+}
