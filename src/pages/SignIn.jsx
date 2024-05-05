@@ -14,7 +14,7 @@ const defaultValues = {
 };
 
 export const SignIn = () => {
-    const { handleSignIn, userData, error } = useContext(AuthC);
+    const { handleSignIn, error } = useContext(AuthC);
 
     const { 
         handleSubmit, 
