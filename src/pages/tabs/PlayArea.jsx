@@ -11,20 +11,6 @@ import { MessageForm } from "../../components/chat/MessageForm"
 import MessageList from "../../components/chat/MessageList";
 import { AuthC } from "../../context/AuthC";
 
-let playerList = [
-    {
-        id: 0,
-        side: "x",
-        fullname: "Игрок #1",
-        win: 0,
-    },
-    {
-        id: 1,
-        side: "o",
-        fullname: "Игрок #2",
-        win: 0,
-    },
-];
 
 export default class PlayArea extends Component {
     static contextType = AuthC;
@@ -32,9 +18,10 @@ export default class PlayArea extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            playerList: [],
             squares: Array(9).fill(null),
             xIsNext: true,
-            lastPlayer: this.xIsNext ? playerList[0].fullname : playerList[1].fullname,
+            lastPlayer: "",
             isWinnerModalOpen: true,
             timeLeft: 180,
             isTimeOutModalOpen: false,
@@ -47,18 +34,43 @@ export default class PlayArea extends Component {
         this.handleRestartGame = this.handleRestartGame.bind(this);
     }
 
-    componentDidMount(){
-        const {userData,handleProtect} = this.context;
-
-        if(userData.id){
-            handleProtect(userData.id);
-            
-        }
+    componentDidMount() {
+        const { handleProtect } = this.context;
+        handleProtect();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const { userData } = this.context;
-        console.log(userData);
+        if (userData && prevProps.userData !== userData && this.state.playerList.length === 0) {
+            this.updatePlayerList(userData);
+        }
+    }
+
+    updatePlayerList(userData) {
+        const winrate = userData.dataWin + userData.dataLoose > 0
+            ? (userData.dataWin / (userData.dataWin + userData.dataLoose)) * 100
+            : 0;
+        const newPlayerList = [
+            {
+                id: userData.id,
+                side: "x",
+                fullname: userData.fullname,
+                win: winrate,
+            },
+            {
+                id: 1,
+                side: "o",
+                fullname: "Игрок #2",
+                win: 0,
+            },
+        ];
+    
+        const lastPlayer = this.state.xIsNext ? newPlayerList[0].fullname : newPlayerList[1].fullname;
+    
+        this.setState({
+            playerList: newPlayerList,
+            lastPlayer: lastPlayer
+        });
     }
 
     componentWillUnmount(){
@@ -79,11 +91,13 @@ export default class PlayArea extends Component {
     }
 
     handleRestartGame(){
+        const firstPlayerName = this.state.playerList[0] ? this.state.playerList[0].fullname : "Игрок #1";
+        const secondPlayerName = this.state.playerList[1] ? this.state.playerList[1].fullname : "Игрок #2";
         this.setState(
             {
                 squares: Array(9).fill(null),
                 xIsNext: true,
-                lastPlayer: this.xIsNext ? playerList[0].fullname : playerList[1].fullname,
+                lastPlayer: this.xIsNext ? firstPlayerName : secondPlayerName,
                 isWinnerModalOpen: true,
                 timeLeft: 180,
                 isTimeOutModalOpen: false,
@@ -103,7 +117,7 @@ export default class PlayArea extends Component {
         squares[i] = this.state.xIsNext ? unionImg : zeroImg;
         this.setState({
             squares: squares,
-            lastPlayer: this.state.xIsNext ? playerList[0].fullname : playerList[1].fullname,
+            lastPlayer: this.state.xIsNext ? this.state.playerList[0].fullname : this.state.playerList[1].fullname,
             xIsNext: !this.state.xIsNext,
         });
     }
@@ -146,11 +160,10 @@ export default class PlayArea extends Component {
         const winner = calculatingWinner(this.state.squares);
         const noWinner = !winner && !this.state.squares.includes(null);
         if(winner || noWinner) clearInterval(this.timerInterval);
-        
         return (
             <div className="wrap-container">
                 <aside className="players-container">
-                    <PlayersAccordion players={playerList} />
+                    <PlayersAccordion players={this.state.playerList} />
                 </aside>
                 {(winner || noWinner || this.state.isTimeOutModalOpen) &&
                     (
@@ -158,7 +171,7 @@ export default class PlayArea extends Component {
                             <div className="modal">
                                 <img src={this.state.isTimeOutModalOpen ? timeOut : gold_trophy} alt="Золотой трофей" />
                                 <p className="win-text">{winner
-                                        ? `${this.state.xIsNext ? playerList[1].fullname : playerList[0].fullname} победил!`
+                                        ? `${this.state.xIsNext ? this.state.playerList[1].fullname : this.state.playerList[0].fullname} победил!`
                                         : (this.state.isTimeOutModalOpen ? `${this.state.lastPlayer} победил!` : "Ничья!")}</p>
                                 <div className="buttons">
                                     <button className="new-game" onClick={this.handleRestartGame}>Новая игра</button>
@@ -187,7 +200,7 @@ export default class PlayArea extends Component {
                 </main>
                 <aside className="chat">
                     <MessageList messages={this.state.messages}/>
-                    <MessageForm playerList={playerList} onMessage={this.handleSendMessage}/>
+                    <MessageForm playerList={this.state.playerList} onMessage={this.handleSendMessage}/>
                 </aside>
                 <div className="walks-player">
                     <p>Ходит</p>
