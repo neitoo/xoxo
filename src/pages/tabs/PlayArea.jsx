@@ -15,38 +15,31 @@ import { AuthC } from "../../context/AuthC";
 export default class PlayArea extends Component {
     static contextType = AuthC;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            playerList: [],
-            squares: Array(9).fill(null),
-            xIsNext: true,
-            lastPlayer: "",
-            isWinnerModalOpen: true,
-            timeLeft: 180,
-            isTimeOutModalOpen: false,
-            gameIsStarted: false,
-            messages: [],
-        };
-        this.handleStartGame = this.handleStartGame.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.handleRestartGame = this.handleRestartGame.bind(this);
-    }
+    state = {
+        playerList: [],
+        squares: Array(9).fill(null),
+        xIsNext: true,
+        lastPlayer: "",
+        isWinnerModalOpen: true,
+        timeLeft: 180,
+        isTimeOutModalOpen: false,
+        gameIsStarted: false,
+        messages: [],
+    };
 
-    componentDidMount() {
+    componentDidMount = () => {
         const { handleProtect } = this.context;
         handleProtect();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
         const { userData } = this.context;
         if (userData && prevProps.userData !== userData && this.state.playerList.length === 0) {
             this.updatePlayerList(userData);
         }
     }
 
-    updatePlayerList(userData) {
+    updatePlayerList = (userData) => {
         const winrate = userData.dataWin + userData.dataLoose > 0
             ? (userData.dataWin / (userData.dataWin + userData.dataLoose)) * 100
             : 0;
@@ -73,7 +66,7 @@ export default class PlayArea extends Component {
         });
     }
 
-    componentWillUnmount(){
+    componentWillUnmount = () => {
         clearInterval(this.timerInterval);
     }
 
@@ -85,12 +78,12 @@ export default class PlayArea extends Component {
         });
     }
 
-    handleStartGame(){
+    handleStartGame = () => {
         this.setState({ gameIsStarted: true })
         this.timerInterval = setInterval(this.tick, 1000);
     }
 
-    handleRestartGame(){
+    handleRestartGame = () => {
         const firstPlayerName = this.state.playerList[0] ? this.state.playerList[0].fullname : "Игрок #1";
         const secondPlayerName = this.state.playerList[1] ? this.state.playerList[1].fullname : "Игрок #2";
         this.setState(
@@ -106,7 +99,7 @@ export default class PlayArea extends Component {
         );
     }
 
-    handleClick(i) {
+    handleClick = (i) => {
         if (!this.state.isWinnerModalOpen || this.state.isTimeOutModalOpen || !this.state.gameIsStarted) {
             return;
         }
@@ -122,16 +115,16 @@ export default class PlayArea extends Component {
         });
     }
 
-    handleCloseModal() {
+    handleCloseModal = () => {
         this.setState({ isWinnerModalOpen: false });
     }
 
-    handleTimeOut(){
+    handleTimeOut = () => {
         clearInterval(this.timerInterval);
         this.setState({isTimeOutModalOpen: true});
     }
 
-    handleSendMessage = (message,namePlayer,isCurrentPlayer) => {
+    handleSendMessage = (message, namePlayer, isCurrentPlayer) => {
         const now = new Date();
         const hours = now.getHours();
         const minutes = now.getMinutes();
@@ -146,7 +139,7 @@ export default class PlayArea extends Component {
         }));
     }
 
-    formatTime(seconds) {
+    formatTime = (seconds) => {
         const minutes = Math.floor((seconds % 3600) / 60);
         const remainingSeconds = seconds % 60;
 
