@@ -51,12 +51,14 @@ export default class PlayArea extends Component {
                 side: "x",
                 fullname: userData.fullname,
                 win: winrate,
+                index: 0,
             },
             {
                 id: 1,
                 side: "o",
                 fullname: "Игрок #2",
                 win: 0,
+                index: 1
             },
         ];
     
