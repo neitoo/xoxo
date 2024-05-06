@@ -42,13 +42,14 @@ const AuthProvider = ({children}) => {
         const userId = JWTService.getUserID();
         PrivateClient.post("/user", {id: userId})
             .then((res)=>{
-                const { user_fullname, data_win, data_loose, user_status } = res.data;
+                const { user_fullname, data_win, data_loose, user_status, admin } = res.data;
                 setUserData((prevData) => ({
                     ...prevData,
                     fullname: user_fullname,
                     dataWin: data_win,
                     dataLoose: data_loose,
                     status: user_status,
+                    admin: admin
                 }));
             })
             .catch((error) =>{
@@ -82,9 +83,18 @@ const AuthProvider = ({children}) => {
                 } else {
                     setError({ error: "Сервер не отвечает." });
                 }
-            });
-        
-            
+            }); 
+    }
+
+    const handleSignUp = (data) => {
+        AuthClient.post("/registration",data)
+            .catch((error) => {
+                if (error.response && error.response.data) {
+                    setError(error.response.data);
+                } else {
+                    setError({ error: "Сервер не отвечает." });
+                }
+            }); 
     }
 
     const handleLogOut = () => {
@@ -136,6 +146,7 @@ const AuthProvider = ({children}) => {
             value={{
                 isUserLogged,
                 handleSignIn,
+                handleSignUp,
                 handleLogOut,
                 handleProtect,
                 handleGetUsers,
