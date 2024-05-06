@@ -1,4 +1,4 @@
-const Table = ({data, isAdmin, headers, showActions = false, textActions = "", onDataClick}) => {
+const Table = ({data, isAdmin, headers, textActions = "", onDataClick}) => {
 
     const handleClick = (item) => {
         if(onDataClick)
