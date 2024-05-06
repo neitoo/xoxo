@@ -17,8 +17,8 @@ export const SignIn = () => {
     const { handleSignIn, error } = useContext(AuthC);
 
     const { 
-        handleSubmit, 
         register,
+        handleSubmit, 
         formState: {errors} 
     } = useForm(
         {
@@ -26,6 +26,7 @@ export const SignIn = () => {
             resolver: yupResolver(signInYup)
         }
     );
+
 
     return (
         <div className="login-wrapper">
