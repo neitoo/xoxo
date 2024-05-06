@@ -17,6 +17,7 @@ export default class PlayArea extends Component {
 
     state = {
         playerList: [],
+        hasUpdatedPlayerList: false,
         squares: Array(9).fill(null),
         xIsNext: true,
         lastPlayer: "",
@@ -28,14 +29,15 @@ export default class PlayArea extends Component {
     };
 
     componentDidMount = () => {
-        const { handleProtect } = this.context;
-        handleProtect();
+        const { userData } = this.context;
+        this.updatePlayerList(userData);
     }
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         const { userData } = this.context;
-        if (userData && prevProps.userData !== userData && this.state.playerList.length === 0) {
+        if (userData.hasOwnProperty('fullname') && !this.state.hasUpdatedPlayerList) {
             this.updatePlayerList(userData);
+            this.setState({ hasUpdatedPlayerList: true });
         }
     }
 
