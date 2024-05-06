@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import send from '../../assets/Send.svg'
 
 export const MessageForm = ({playerList, onMessage}) => {
 
     const [message, setMessage] = useState('');
     const [selectedPlayerIndex, setSelectedPlayerIndex] = useState(0);
-    const [selectedPlayerName, setSelectedPlayerName] = useState(playerList?.[0]?.fullname);
+    const [selectedPlayerName, setSelectedPlayerName] = useState('');
+
+    useEffect(() => {
+        if (playerList.length > 0) {
+            setSelectedPlayerName(playerList[0].fullname);
+        }
+    }, [playerList]);
 
     const handleInputChange = (event) => {
         setMessage(event.target.value);
@@ -34,7 +40,7 @@ export const MessageForm = ({playerList, onMessage}) => {
         <div className="chat-controls">
             <select onChange={handlePlayerChange}>
                 {playerList.map((player) => (
-                    <option key={player.id} value={player.id}>{player.fullname}</option>
+                    <option key={player.index} value={player.index}>{player.fullname}</option>
                 ))}
             </select>
             <input 
