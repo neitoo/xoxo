@@ -5,8 +5,8 @@ const MessageList = ({messages}) => {
         <div className="scroll">
             <div className="messages-list">
                {messages.map((message,index) =>(
-                    <div className={`wrap-message ${message.curPlayer ? "green" : "red"}`}>
-                        <div key={index} className={`message ${message.curPlayer ? "green" : "red"}`}>
+                    <div key={index} className={`wrap-message ${message.curPlayer ? "green" : "red"}`}>
+                        <div className={`message ${message.curPlayer ? "green" : "red"}`}>
                             <div className="head-message">
                                 <p className={`name ${message.curPlayer ? "green" : "red"}`}>{message.name}</p>
                                 <span className="time">{message.time}</span>
