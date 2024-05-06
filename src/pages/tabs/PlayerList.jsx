@@ -74,7 +74,7 @@ export default class PlayerList extends Component{
             { label: 'Возраст', key: 'age' },
             { label: 'Пол', key: 'gender' },
             { label: 'Создан', key: 'registrationDate' },
-            { label: '', key: 'actions' },
+            ...(this.state.isAdmin ? [{ label: '', key: 'actions' }] : []),
         ];
 
         return(
@@ -96,7 +96,7 @@ export default class PlayerList extends Component{
                             <button onClick={this.handleModalOpen}>Добавить игроков</button>
                         )}
                     </div>
-                    <Table data={users} isAdmin={this.state.isAdmin} headers={headers} showActions={true} textActions='Удалить' onDataClick={this.handleDeleteClick}/>
+                    <Table data={users} isAdmin={this.state.isAdmin} headers={headers} textActions='Удалить' onDataClick={this.handleDeleteClick}/>
                 </div>
             </div>
         )
