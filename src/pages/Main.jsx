@@ -8,9 +8,24 @@ import ActivePlayer from '../pages/tabs/ActivePlayer';
 import GameHistory from '../pages/tabs/GameHistory';
 import PlayerList from '../pages/tabs/PlayerList';
 import Home from '../pages/tabs/Home';
+import { useContext, useEffect, useState } from 'react';
+import { AuthC } from '../context/AuthC';
 
 const Main = () => {
+
+    const { handleProtect } = useContext(AuthC);
+
+    const [hasCalledProtect, setHasCalledProtect] = useState(false);
+
+    useEffect(() => {
+        if (!hasCalledProtect) {
+            handleProtect();
+            setHasCalledProtect(true);
+        }
+    }, [handleProtect, hasCalledProtect]);
+
     return (
+        
         <div className="App">
             <Header/>
             
